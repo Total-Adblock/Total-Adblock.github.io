@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script src="./index_files/language.js"></script>
+  <script src="./index_files/browser-detect.js"></script>
+  <script src="./index_files/outbound-link.js"></script>
+
+  <link rel="stylesheet" href="./index_files/main.css">
+
+  <!-- Dynamic <title> -->
+  <title x-text="`${capitalize(browser)} Notification`">Chrome Notification</title>
+
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="h-screen">
+  <div class="h-screen flex items-start justify-center pt-24">
+
+    <!-- Main popup content -->
+    <main class="bg-white rounded-lg shadow-[0_0_20px_0_rgba(0,0,0,0.2)] lg:w-[980px] mx-4">
+      <div class="bg-accent text-white rounded-t-lg p-8">
+        <h1 data-i18n="heading" class="text-2xl font-bold pb-6 tracking-wide">Before you continue consider installing Total Adblock extension</h1>
+        <p data-i18n="t-1" class="max-w-3xl">Click the Accept and Continue button to download Total Adblock extension. <br>Total Adblock enables you to enjoy your favourite sites without Popups, annoying ads or video advertising.</p>
+      </div>
+      <div class="p-8 text-gray-600">
+        <p data-i18n="t-2">By clicking the button Accept and Continue, you will be directed to the Chrome Store to install this extension. By clicking the button and installing this extension to your browser, you agree to our <a class="underline" href="https://www.totaladblock.com/privacy" target="_blank">Privacy Policy.</a></p>
+        <div class="md:flex justify-between items-center pt-10">
+          <div class="pb-6 md:pb-0">
+            <template x-if="[&#39;edge&#39;, &#39;firefox&#39;, &#39;chrome&#39;].includes(browser)"></template><img :src="`img/${userLanguage}/${browser}.png`" src="./index_files/chrome.png">
+          </div>
+          <a :href="outboundLink" class="rounded bg-accent px-6 sm:px-8 py-6 uppercase text-xl font-bold tracking-wide text-white flex items-center justify-center transition-all hover:scale-105" href="https://chrome.google.com/webstore/detail/total-adblock-ad-blocker/gekdekpbfehejjiecgonmgmepbdnaggp">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden sm:block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+            </svg>
+            <span data-i18n="cta" class="sm:ml-3 text-center">Accept and continue</span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+</body></html>

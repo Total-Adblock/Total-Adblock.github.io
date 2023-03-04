@@ -1,0 +1,41 @@
+class outboundLink {
+  static getUrlVars = () => {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+  }
+
+  static buildUrl = () => {
+    var domain = outboundLink.getUrlVars()['domain'];
+    var hash = outboundLink.getUrlVars()['hash'];
+    var action = outboundLink.getUrlVars()['action'];
+    var s1 = outboundLink.getUrlVars()['s1'];
+    var s2 = outboundLink.getUrlVars()['s2'];
+    var s3 = outboundLink.getUrlVars()['s3'];
+
+    if (domain === undefined) {
+      return "#";
+    }
+
+    return "https://url." + domain + "/" + hash + "/" + action + "/" + s1 + "/" + s2 + "/" + s3;
+  }
+
+  static removeUrlVars = () => {
+    var uri = window.location.toString();
+    if (uri.indexOf("?") > 0) {
+      var clean_uri = uri.substring(0, uri.indexOf("?"));
+      window.history.replaceState({}, document.title, clean_uri);
+    }
+  }
+
+  static getOutboundLink = () => {
+    const link = outboundLink.buildUrl()
+    outboundLink.removeUrlVars()
+    return link
+  }
+}
